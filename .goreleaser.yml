@@ -1,0 +1,35 @@
+project_name: gorleaser-sign
+release:
+  disable: true
+builds:
+  - id: gorleaser-sign
+    goos:
+      - linux
+    goarch:
+      - amd64
+    main: ./
+    binary: gorleaser-sign
+    env:
+      - CGO_ENABLED=0
+nfpms:
+  - file_name_template: "{{ .ProjectName }}-{{ .Version }}.{{ .Arch }}"
+    package_name: gorleaser-sign
+    replacements:
+      "386": 32bit
+      amd64: x86_64
+      arm: ARM
+      arm64: ARM64
+      darwin: macOS
+      dragonfly: DragonFlyBSD
+      freebsd: FreeBSD
+      linux: Linux
+      netbsd: NetBSD
+      openbsd: OpenBSD
+      windows: Windows
+    rpm:
+      signature:
+        key_file: ./key.gpg
+    formats:
+      - rpm
+    description: Test
+    bindir: /usr/bin
